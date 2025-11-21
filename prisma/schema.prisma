@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum MetricEnum {
+  Subscribers
+  PostViews
+  ReactionsToPosts
+  NotificationsEnabled
+  ForwardingPosts
+}
+
+model Metric {
+  id        Int     @id @default(autoincrement())
+  key       MetricEnum 
+  value     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
